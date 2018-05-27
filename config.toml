@@ -1,0 +1,4 @@
+baseURL = "https://rjai.me"
+languageCode = "en-us"
+title = "Jaime RGP"
+theme = "paper"
