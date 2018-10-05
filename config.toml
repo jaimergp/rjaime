@@ -1,5 +1,9 @@
 baseURL = "https://rjai.me"
 languageCode = "en-us"
-title = "Jaime RGP"
+title = "rjai.me - A personal blog about scientific software, music and miscellanea"
 theme = "paper"
+
+[params]
 author = "Jaime RGP"
+shortTitle = "rjai.me"
+description = "A personal blog about scientific software, music and miscellanea"
