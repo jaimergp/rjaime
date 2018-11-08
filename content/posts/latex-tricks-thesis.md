@@ -30,7 +30,7 @@ A large manuscript such as a thesis will end up containing lots of high-resoluti
 
 You can use this Bash function (inspired in [this answer](https://tex.stackexchange.com/a/19047)) to reduce the file size drastically.
 
-```
+```bash
 compressPDF() {
     gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=${1%.pdf}_compressed.pdf $1
 }
@@ -48,7 +48,7 @@ By earlier I mean *as soon as you save it in your `.bib` file*. To do that, the 
 
 This Bash function (inspired in [this one](https://users.aalto.fi/~mkouhia/2016/bibtex-from-dx-doi-org/)) will return BibTeX citations for every DOI passed (just the DOI, no prefixes nor URLs).
 
-```
+```bash
 doi2bib() {
     for arg in $@; do
         curl -LH "Accept: application/x-bibtex" "http://dx.doi.org/$arg"
@@ -104,6 +104,25 @@ $> doi2bib 10.1002/jcc.24847 10.1039/C7SC01296A 10.1021/acs.jcim.7b00714
 ```
 
 Voilà! Ready for inclusion in your `.bib` file. But remember, review each entry first!
+
+## Good-looking underlines
+
+In your list of publications, it is usually good idea to underline or highlight your name so the reader can easily locate your contribution. Since I did not want to highlight in yellow, I opted for underlining my name. Default underline in LaTeX is kind of ugly, though. It can either goes across descenders (`g`, `j`, etc), or go below them. Fortunately, I found [this post by alexwlchan](https://alexwlchan.net/2017/10/latex-underlines/) where he explains how you can make them look better by skipping descenders with a cool contour trick. This is the code I ended up using. Simply call `\myuline{<text>}` and there you go!
+
+```tex
+% Custom underlines (from https://alexwlchan.net/2017/10/latex-underlines/)
+
+\usepackage[normalem]{ulem}
+\renewcommand{\ULdepth}{2pt}
+\usepackage{contour}
+\contourlength{0.8pt}
+
+\newcommand{\myuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+```
+
 
 ## Find help online
 

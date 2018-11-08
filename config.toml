@@ -2,6 +2,8 @@ baseURL = "https://rjai.me"
 languageCode = "en-us"
 title = "rjai.me - A personal blog about scientific software, music and miscellanea"
 theme = "paper"
+pygmentsCodeFences = true
+pygmentsStyle = "monokailight"
 
 [params]
 author = "Jaime RGP"
