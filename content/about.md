@@ -1,6 +1,8 @@
 ---
 title: About me
-menu: "main"
+menu:
+  main:
+    pre: "<i class='fas fa-user'></i>"
 weight: -10
 type: page
 date: 2018-11-19T13:05:00+02:00

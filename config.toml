@@ -13,20 +13,20 @@ description = "A personal blog about scientific software, music and miscellanea"
     [[params.footer]]
         identifier = "github"
         name = "GitHub"
-        pre = ""
+        pre = "<i class='fab fa-github'></i>"
         url = "https://github.com/jaimergp"
         weight = 10
 
     [[params.footer]]
         identifier = "twitter"
         name = "Twitter"
-        pre = ""
+        pre = "<i class='fab fa-twitter'></i>"
         url = "https://twitter.com/jaime_rgp"
         weight = 20
 
     [[params.footer]]
         identifier = "cv"
         name = "CV"
-        pre = ""
+        pre = "<i class='fas fa-address-card'></i>"
         url = "https://github.com/jaimergp/cv/blob/master/cv.pdf"
         weight = 1
