@@ -9,3 +9,24 @@ pygmentsStyle = "monokailight"
 author = "Jaime RGP"
 shortTitle = "rjai.me"
 description = "A personal blog about scientific software, music and miscellanea"
+
+    [[params.footer]]
+        identifier = "github"
+        name = "GitHub"
+        pre = ""
+        url = "https://github.com/jaimergp"
+        weight = 10
+
+    [[params.footer]]
+        identifier = "twitter"
+        name = "Twitter"
+        pre = ""
+        url = "https://twitter.com/jaime_rgp"
+        weight = 20
+
+    [[params.footer]]
+        identifier = "cv"
+        name = "CV"
+        pre = ""
+        url = "https://github.com/jaimergp/cv/blob/master/cv.pdf"
+        weight = 1
