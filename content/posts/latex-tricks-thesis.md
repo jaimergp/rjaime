@@ -1,6 +1,7 @@
 ---
 title: "(Non-)LaTeX tricks I used while I was writing my thesis with LaTeX"
 date: 2018-10-05T18:10:52+02:00
+lastmod: 2018-11-08
 ---
 
 Like many, I wrote my PhD thesis using LaTeX. I had used LaTeX before, but not with such a big manuscript. I learnt a few tricks during that process that I think somebody might find useful.
