@@ -18,4 +18,4 @@ I like to write about technical tips, music and the projects I am currently work
 
 ---
 
-I am open to new job opportunities! If you want to hire me, please [download my CV](https://github.com/jaimergp/cv/raw/master/cv.pdf) and reach me at `jaime.rogue [at] gmail.com`.
+I am open to new job opportunities! If you want to hire me, please [download my CV](https://github.com/jaimergp/cv/raw/master/cv.pdf) and reach me at `jaime.rogue [at] gmail.com`. I am mostly interested in doing a postdoc in molecular modelling or computational chemistry with a strong focus on software development.
