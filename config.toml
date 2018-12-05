@@ -4,6 +4,7 @@ title = "rjai.me - A personal blog about scientific software, music and miscella
 theme = "paper"
 pygmentsCodeFences = true
 pygmentsStyle = "monokailight"
+disableKinds = ["taxonomy","taxonomyTerm"]
 
 [params]
 author = "Jaime RGP"
