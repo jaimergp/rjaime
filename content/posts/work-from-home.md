@@ -4,7 +4,7 @@ date: 2018-12-03T21:37:35+01:00
 draft: true
 ---
 
-Doing computational research often means generating lots of data that needs to be processed and analyzed. In certain areas of molecular modelling, file sizes often go well into the gigabytes or even terabytes. As a result, downloading the full dataset to work on it locally is not only cumbersome, but inefficient. Are there any alternatives? Of course!
+Doing computational research often means generating lots of data that needs to be processed and analyzed. In certain areas of molecular modelling, file sizes often go well into the gigabytes or even terabytes. If you have to work from home or are doing a short stay away from your workspace, downloading the full dataset to work on it locally is not only cumbersome, but inefficient. Are there any alternatives? Of course!
 
 <!--more-->
 
