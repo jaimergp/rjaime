@@ -1,31 +1,22 @@
 ---
 title: "Tutorial: Remote Data Access & Analysis (pt. 2)"
-date: 2018-12-03T21:37:45+01:00
+date: 2018-12-03T21:37:20+01:00
 draft: true
 ---
 
-Doing computational research often means generating lots of data that needs to be processed and analyzed. In certain areas of molecular modelling, file sizes often go well into the gigabytes or even terabytes. As a result, downloading the full dataset to work on it locally is not only cumbersome, but inefficient. Are there any alternatives? Of course!
+This is the second part of the tutorial series [How I work from home](/posts/work-from-home), in which I explain how to access your data remotely via different ways. In this part, I talk about remote data _analysis_ using the excellent Jupyter Notebook environment.
 
 <!--more-->
 
----
-
-In this tutorial series, I will talk about two alternative methods:
-
-1. Working with remote data over SSH(FS) [[part 1](/posts/remote-data-access)]
-2. Using Jupyter Notebooks for remote data analysis [part 2, this one]
-
-The former is more general purpose but eventually incurs downloading the data anyway, while the latter does not download any raw data: only the results of the analysis, which is often way less.
-
-> __Table of Contents__
+> __Part 2 - Table of Contents__
 >
 > 1. [Install Jupyter Notebook](#01-install-jupyter-notebook)
-> 2. [Forward the server connection](#02-forward-the-server-connection)
+> 2. [Link the remote server to your local machine](#02-forward-the-server-connection)
 > 3. [Connect from your browser](#03-connect)
 
 # Remote data analysis with Jupyter Notebook
 
-You can use the methods listed in [pt. 1](/posts/remote-data-access) to access any files you want remotely, but in the end it will incur downloading something. If you simply intend to analyse the data (interactively or not), you might just want to run the analysis remotely as well. You won't have to download anything, and the pipeline will have faster access to the files.
+You can use the methods listed in [pt. 1](/tutorials/remote-data-access) to access any files you want remotely, but in the end it will incur downloading something. If you simply intend to analyse the data (interactively or not), you might just want to run the analysis remotely as well. You won't have to download anything, and the pipeline will have faster access to the files.
 
 > **Notice**: Take into account that the data processing will run on the remote computer. If this is a shared computer and you run numerically intensive processes, all the other users will notice the performance loss. In that case, consider scripting the interactive analysis in an automated way so you can submit it to a calculation node.
 
@@ -38,17 +29,17 @@ Since I mostly use Python for data analysis, I will install Jupyter along a Pyth
 - [Anaconda Distribution](https://www.anaconda.com/download/#linux): The full pack with hundreds of packages for data science, Jupyter included.
 - [Miniconda](https://conda.io/miniconda.html): A stripped down version with only the basics (Python + conda, mainly), which you can then use to install what you want.
 
-I normally prefer a smaller installation size, so choose Miniconda and then install Jupyter in the REMOTE computer. You don't need it locally (you will just connect to a webserver). Instructions for Miniconda:
+I normally prefer a smaller installation size, so choose Miniconda and then install Jupyter in the `REMOTE` computer. You don't need it locally (you will just connect to a webserver). Instructions for Miniconda:
 
 ```bash
-# Connect to remote PC (jump through GATEWAY if necessary)
+# Connect to remote PC (jump through GATEWAY if necessary, see part 1)
 $ ssh robert@remote.example.org
 # Download Miniconda Python 3.7 for Linux 64bit
 $ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 # Install Miniconda
 $ bash Miniconda*.sh
 # Configure .bashrc
-$ echo ". ~/miniconda/etc/default.d/conda.sh" >> ~/.bashrc
+$ echo ". ~/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
 $ source ~/.bashrc
 # Activate conda base environment and install Jupyter
 $ conda activate
@@ -111,6 +102,42 @@ $ ssh -NfL 8888:localhost:8888 -p 2222 robert@localhost
 
 ## 03: Connect!
 
-If the 2nd step was successful, you can now open a new tab in your browser and enter `http://localhost:8888`. It will ask for a token, which should be listed in the Jupyter server session you created in the 1st step. In fact, you can `Ctrl+Click` in that link to open the webapp directly in your local browser. It will open now!
+If the 2nd step was successful, you can now open a new tab in your browser and enter `http://localhost:8888`. It will ask for the token from step 1. In fact, you can also `Ctrl+Click` in that link (`http://localhost:8888/?token=fbccf41667a91f907253cb653654651356623741d947`) to open the webapp directly in your local browser. It will open now!
 
-You can create a new Notebook by using the dropdown menu in the top right corner and begin your data analysis. You will be able to type your code without lag because the commands will only be sent to the remote PC when you execute the cell! Remember that you can also run shell commands by prepending a exclamation mark (`!ls -alh`).
+![Jupyter Notebook web-app](/images/jupyter-notebook-webapp.jpg)
+
+You can create a new Notebook by using the `New` dropdown menu in the top right corner and begin your data analysis. You will be able to type your code without lag because the commands will only be sent to the remote PC when you execute the cell (`Ctrl+Enter` or `Shift+Enter`).
+
+## 04: Additional benefits of the Notebook environment
+
+The Notebook environment can assist your remote work in more ways than interactive analysis:
+
+### Explore and view your files
+
+The Notebook web-app provides a tree view for all the directories and files listed under the working directory. This is the first thing you see when you connect to the server. So if you ran `jupyter notebook` from `~/Documents`, the [dashboard](https://jupyter-notebook.readthedocs.io/en/stable/notebook.html) will list everything under `~/Documents/*`.
+
+From this view you can also:
+
+- __Edit text files__: The builtin editor supports syntax highlighting, shortcuts...
+- __View/download other files__: If your browser natively supports the format (images, PDF documents...), you will preview it. Otherwise, it will be downloaded.
+- __Create, copy, rename and delete__ generic directories and files
+- __Manage running notebooks__: Pause, resume and stop them, even several ones at the same time.
+
+### Execute shell code
+
+You might already know that, inside a notebook, you can prepend an exclamation mark before the shell command (`!ls -alh`), and when you execute the cell that command will be run in a subprocess. The `stdout` results will appear as the results of the cell. You can even save them to a Python variable: `directories = !ls -1 */`
+
+A little lesser known feature is the possibility of launching a full terminal in your browser. From the `New` dropdown in the dashboard, choose `Terminal` and you will get a new tab with an interactive shell console:
+
+![Jupyter Notebook terminal](/images/jupyter-notebook-terminal.jpg)
+
+
+# Wrapping up
+
+That's all for now. Jupyter can really accelerate your analysis workflows in the way to automating everything. However, there are areas where a graphical interface is needed no matter what... Check the [third part](/tutorials/remote-graphical-access) to learn how to do that on remote!
+
+__All parts__
+
+1. [Remote file access](/tutorials/remote-data-access)
+2. [Remote data analysis](/tutorials/remote-data-analysis)
+3. [Remote graphical interfaces and desktop](/tutorials/remote-graphical-access)

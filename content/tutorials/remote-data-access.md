@@ -1,23 +1,14 @@
 ---
-title: "Tutorial: Remote Data Access & Analysis (pt. 1)"
-date: 2018-12-03T21:37:35+01:00
+title: "Tutorial: Remote Data (Work from home, pt. 1)"
+date: 2018-12-03T21:37:10+01:00
 draft: true
 ---
 
-Doing computational research often means generating lots of data that needs to be processed and analyzed. In certain areas of molecular modelling, file sizes often go well into the gigabytes or even terabytes. As a result, downloading the full dataset to work on it locally is not only cumbersome, but inefficient. Are there any alternatives? Of course!
+This is the first part of the tutorial series [How I work from home](/posts/work-from-home), in which I explain how to access your data remotely via different ways. In this part, I talk about remote data access via `ssh` and `sshfs`, tunneling included.
 
 <!--more-->
 
----
-
-In this tutorial series, I will talk about two alternative methods:
-
-1. Working with remote data over SSH(FS) [part 1, this one]
-2. Using Jupyter Notebooks for remote data analysis [[part 2](/posts/remote-data-analysis)]
-
-The former is more general purpose but eventually incurs downloading the data anyway, while the latter does not download any raw data: only the results of the analysis, which is often way less.
-
-> __Table of Contents__
+> __Part 1 - Table of Contents__
 >
 > 1. [Access remote data on demand with sshfs](#access-remote-data-on-demand-with-sshfs)
 > 2. [Get access through a gateway](#get-access-through-a-gateway)
@@ -270,7 +261,18 @@ I like to have persistent, compressed SSH connections that do not hang over some
 
 # Bonus: SSH keys
 
-For a better experience, I recommend [configuring SSH keys for login](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) instead of password-based. That way, you won't need to type the passwords, especially on bastioned hosts! You will have to do it for both connections; ie, `HOME -> GATEWAY` and `GATEWAY -> REMOTE`.
+For a better access experience, I recommend [configuring SSH keys for login](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) instead of password-based. That way, you won't need to type the passwords, especially on bastioned hosts! You will have to do it for all connections involved; ie, `HOME -> GATEWAY` and `GATEWAY -> REMOTE`.
+
+### Direct access to remote PC
+
+In your home PC:
+
+```bash
+$ ssh-keygen -t rsa
+# Follow the assistant
+$ ssh-copy-id robert@remote.example.org
+```
+### Access through gateway
 
 In your home PC:
 
@@ -290,4 +292,12 @@ $ ssh-copy-id robert@remote.example.org
 
 Done! No more passwords!
 
-(Continue to [part2](/posts/remote-data-analysis)).
+# Wrapping up
+
+That's all for now. With this first post I hope I have covered how to access your remote data even if it is behind a gateway server. Next part will be devoted to [remote data _analysis_](/tutorials/remote-data-analysis)), so the files stay where they are.
+
+__All parts__
+
+1. [Remote file access](/tutorials/remote-data-access)
+2. [Remote data analysis](/tutorials/remote-data-analysis)
+3. [Remote graphical interfaces and desktop](/tutorials/remote-graphical-access)
