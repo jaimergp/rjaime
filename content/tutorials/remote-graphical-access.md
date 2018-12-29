@@ -1,7 +1,6 @@
 ---
 title: "Tutorial: Remote Desktop (Work from home, pt. 3)"
-date: 2018-12-03T21:37:30+01:00
-draft: true
+date: 2018-12-28T21:37:30+01:00
 ---
 
 This is the third (and last) part of the tutorial series [How I work from home](/posts/work-from-home), in which I explain how to access your data remotely via different ways. In this part, I talk about the inevitable graphical access to your remote machine: the different approaches and their pros and cons.
@@ -10,7 +9,7 @@ This is the third (and last) part of the tutorial series [How I work from home](
 
 > __Part 3 - Table of Contents__
 >
-> 1. [First option: don't](#first-option-dont)
+> 1. [First option: don't](#first-option-don-t)
 > 2. [Second option: through SSH](#second-option-through-ssh)
 > 3. [Third option: through remote desktop protocols](#third-option-through-remote-desktop-protocols)
 
@@ -18,7 +17,7 @@ This is the third (and last) part of the tutorial series [How I work from home](
 
 ## First option: don't!
 
-Redirecting all the graphical interface information (positions, polygons, actions...) through the network connection is usually more expensive than simply streaming the raw data to a local client, that's why I recommend the `sshfs` approach commented in [part1](/tutorials/remote-data-access) or even the remote analysis from [part 2](/tutorials/remote-data-analysis).
+Redirecting all the graphical interface information (positions, polygons, actions...) through the network connection is usually more expensive than simply streaming the raw data to a local client, that's why I recommend the `sshfs` approach commented in [part 1](/tutorials/remote-data-access) or even the remote analysis from [part 2](/tutorials/remote-data-analysis).
 
 If you use `sshfs`, you can use your locally installed software to open and edit your remote files because they will _believe_ that the files are actually in your computer.
 
@@ -51,7 +50,7 @@ Or in `~/.ssh/config`:
 Host remote
     Hostname remote.example.org
     User robert
-    ProxyJump gerard@gateway.example.org:22522
+    ProxyJump bianca@bastion.example.org:22522
     ForwardX11 yes
 ```
 
@@ -61,12 +60,12 @@ If it does not work (`empty DISPLAY`, etc), please check the [answers to this qu
 
 __Pros__
 
-- If you are lucky, very easy to set up
-- No additional installations necessary
+- If you are lucky, very easy to set up.
+- No additional installations necessary.
 
 __Cons__
 
-- If the connection is slow, the graphical information can take a while to be rendered locally, so sometimes is faster to mount the data `sshfs` and use a local program
+- If the connection is slow, the graphical information can take a while to be rendered locally, so sometimes is faster to mount the data `sshfs` and use a local program.
 - It it doesn't work out of the box, a lot of moving parts must be set up. It might be the SSH server, an incompatibility between remote and local libraries...
 
 
@@ -91,13 +90,13 @@ They consist of a server that runs on the machine to be accessed (`REMOTE`) and 
 
 __Pros__
 
-- Better performance
-- Feels like sitting at the remote desktop if there is no network lag
+- Better performance.
+- Feels like sitting at the remote desktop if there is no network lag.
 
 __Cons__
 
-- Elevated privileges needed for installation
-- If the connection is slow, it will feel jumpy
+- Elevated privileges needed for installation.
+- If the connection is slow, it will feel jumpy.
 
 You will have to ask your IT admin to install the server in your remote computer if you don't have superuser permissions.
 
@@ -114,7 +113,7 @@ sudo apt install remmina
 sudo pacman -S remmina
 ```
 
-Remmina provides a graphical interface to set everything up! You just need to provide the protocol that the remote server is using and its address and port. Even if `REMOTE` is behind a gateway, you can set up an SSH tunnel in the same configuration dialog.
+Remmina provides a graphical interface to set everything up! You just need to provide the protocol that the remote server is using and its address and port. Even if `REMOTE` is behind a bastion, you can set up an SSH tunnel in the same configuration dialog.
 
 ### NoMachine only
 
@@ -129,7 +128,7 @@ yaourt -S nomachine
 
 You can then open the client and create new connection using the `New` button in the top (if it is not already appearing automatically).
 
-If you have __direct access__, it will be easy. For the `REMOTE` machine in [part 1](/tutorials/remote-data-access#get-access-through-a-gateway):
+If you have __direct access__, it will be easy. For the `REMOTE` machine in [part 1](/tutorials/remote-data-access#get-access-through-a-bastion):
 
 - Protocol: `NX`
 - Host: `remote.example.org`
@@ -138,12 +137,12 @@ If you have __direct access__, it will be easy. For the `REMOTE` machine in [par
 - Password: `**********`
 - Don't use a proxy
 
-But if you have to jump through a gateway, you will need a port forwarding first. Let's assume the same `HOME -> GATEWAY -> REMOTE` situation as in [part 1](/tutorials/remote-data-access#get-access-through-a-gateway).
+But if you have to jump through a bastion, you will need a port forwarding first. Let's assume the same `HOME -> BASTION -> REMOTE` situation as in [part 1](/tutorials/remote-data-access#get-access-through-a-bastion).
 
 ```
                                           |
                                           |
-[HOME] ---(ssh)---> [GATEWAY] ---(ssh)---> [REMOTE]
+[HOME] ---(ssh)---> [BASTION] ---(ssh)---> [REMOTE]
                                           |
                                           | firewall
 ```
@@ -152,8 +151,8 @@ But if you have to jump through a gateway, you will need a port forwarding first
 Then, you create the tunnel:
 
 ```bash
-$ ssh -J gerard@gateway.example.org:22522 robert@remote.example.org   -NfL 4003:localhost:4000
-#        \________gateway jump__________/ \____remote server______/ new port__/           \_NoMachine server port
+$ ssh -J bianca@bastion.example.org:22522 robert@remote.example.org   -NfL 4003:localhost:4000
+#        \________bastion jump__________/ \____remote server______/ new port__/           \_NoMachine server port
 ```
 > Take into account that you will need to create the tunnel everytime your `HOME` machine reboots, so consider creating an `alias` or a [`~/.ssh/config` entry](/tutorials/remote-data-access#from-bash-aliases-to-the-SSH-config-file).
 
@@ -174,7 +173,7 @@ Voilà!
 
 # Wrapping up
 
-With this third part I have covered all convenience methods to work with remote computers, even when sitting behind a gateway server. I hope that you find it useful and please ask doubts or request improvements if you want! I will be happy to answer by [Twitter](https://twitter.com/jaime_rgp), [GitHub issues](https://github.com/jaimergp/rjaime/issues) or [email](mailto:jaime.rogue@gmail.com).
+With this third part I have covered all convenience methods to work with remote computers, even when sitting behind a bastion server. I hope that you find it useful and please ask doubts or request improvements if you want! I will be happy to answer by [Twitter](https://twitter.com/jaime_rgp) or a [GitHub issue](https://github.com/jaimergp/rjaime/issues).
 
 __All parts__
 

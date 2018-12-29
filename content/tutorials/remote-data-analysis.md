@@ -1,7 +1,6 @@
 ---
-title: "Tutorial: Remote Data Access & Analysis (pt. 2)"
-date: 2018-12-03T21:37:20+01:00
-draft: true
+title: "Tutorial: Remote Data Analysis (Work from home, pt. 2)"
+date: 2018-12-28T21:37:20+01:00
 ---
 
 This is the second part of the tutorial series [How I work from home](/posts/work-from-home), in which I explain how to access your data remotely via different ways. In this part, I talk about remote data _analysis_ using the excellent Jupyter Notebook environment.
@@ -32,27 +31,28 @@ Since I mostly use Python for data analysis, I will install Jupyter along a Pyth
 I normally prefer a smaller installation size, so choose Miniconda and then install Jupyter in the `REMOTE` computer. You don't need it locally (you will just connect to a webserver). Instructions for Miniconda:
 
 ```bash
-# Connect to remote PC (jump through GATEWAY if necessary, see part 1)
-$ ssh robert@remote.example.org
+# Connect to remote PC (jump through BASTION if necessary, see part 1)
+[henry@home] $ ssh robert@remote.example.org
 # Download Miniconda Python 3.7 for Linux 64bit
-$ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+[robert@remote] $ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 # Install Miniconda
-$ bash Miniconda*.sh
+[robert@remote] $ bash Miniconda*.sh
 # Configure .bashrc
-$ echo ". ~/miniconda/etc/profile.d/conda.sh" >> ~/.bashrc
-$ source ~/.bashrc
+# If present, remove the PATH modification line added by the Miniconda installer
+[robert@remote] $ echo ". ~/miniconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+[robert@remote] $ source ~/.bashrc
 # Activate conda base environment and install Jupyter
-$ conda activate
-$ conda install jupyter notebook ipython
+[robert@remote] $ conda activate
+[robert@remote] $ conda install jupyter notebook ipython
 ```
 
 Now, you can run Jupyter Notebook in the remote PC. Use the `--no-browser` flag to skip the automatic `$BROWSER` launch.
 
 ```bash
 # If not already activated
-$ conda activate
+[robert@remote] $ conda activate
 # Run Jupyter server
-$ jupyter notebook --no-browser
+[robert@remote] $ jupyter notebook --no-browser
 ```
 
 You will see something like this in the output:
@@ -73,6 +73,14 @@ If you `Ctrl+Click` on that URL now, a new tab will open in the browser, but it 
 
 You need to keep this process running, so don't close the `ssh` connection! If you really need to do that, consider using `screen` or `tmux` to create a virtual session before launching the Jupyter server. Remember to copy the token code in that case!
 
+```bash
+[robert@remote] $ screen -R notebook
+[robert@remote+screen] $ conda activate
+[robert@remote+screen] $ jupyter notebook --no-browser
+# <Ctrl+A><D> to exit screen and leave it running
+# Re-enter screen with: screen -R notebook
+```
+
 ## 02: Forward the server connection
 
 At this point, the Jupyter server will be running, but we cannot access it from our home PC. We need to forward the remote IP and port (`8888` by default) to our `localhost` address with SSH tunneling, _aka_ the [-Nfl combo](https://explainshell.com/explain?cmd=ssh+-NfL).
@@ -80,29 +88,29 @@ At this point, the Jupyter server will be running, but we cannot access it from 
 If you have direct access to the remote PC running the Jupyter server, it is easy. We will use the same port at both sides for simplicity:
 
 ```bash
-$ ssh -NfL 8888:localhost:8888 robert@remote.example.org
+[henry@home] $ ssh -NfL 8888:localhost:8888 robert@remote.example.org
 ```
 
-If you have to jump through a gateway server, you can use `-J` like before and it will behave as expected:
+If you have to jump through a bastion server, you can use `-J` like before and it will behave as expected:
 
 ```bash
-$ ssh -J gerard@gateway.example.org:22522 -NfL 8888:localhost:8888 robert@remote.example.org
+[henry@home] $ ssh -J bianca@bastion.example.org:22522 -NfL 8888:localhost:8888 robert@remote.example.org
 ```
 
-Without it, you can do it with two forwardings:
+Without `-J` (older OpenSSH builds), you can do it with two forwardings:
 
 ```bash
-# First connection let us bypass the gateway
-$ ssh -NfL 2222:remote.example.org:22 gerard@gateway.example.org -p 22522
+# First connection let us bypass the bastion
+[henry@home] $ ssh -NfL 2222:remote.example.org:22 bianca@bastion.example.org -p 22522
 # We can now access REMOTE through localhost at port 2222!
 # Bind the remote 8888 to our local 8888.
 # Notice how the username matches REMOTE, not HOME
-$ ssh -NfL 8888:localhost:8888 -p 2222 robert@localhost
+[henry@home] $ ssh -NfL 8888:localhost:8888 -p 2222 robert@localhost
 ```
 
 ## 03: Connect!
 
-If the 2nd step was successful, you can now open a new tab in your browser and enter `http://localhost:8888`. It will ask for the token from step 1. In fact, you can also `Ctrl+Click` in that link (`http://localhost:8888/?token=fbccf41667a91f907253cb653654651356623741d947`) to open the webapp directly in your local browser. It will open now!
+If the 2nd step was successful, you can now open a new tab in your browser and enter `http://localhost:8888`. It will ask for the token from step 1. In fact, you can also `Ctrl+Click` in that link (`http://localhost:8888/?token=fbccf41667a91f907253cb653654651356623741d947`) to open the webapp directly in your local browser. It will correctly load now!
 
 ![Jupyter Notebook web-app](/images/jupyter-notebook-webapp.jpg)
 
