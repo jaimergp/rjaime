@@ -102,3 +102,5 @@ CUDA vs. OpenCL: 2.17776e-07
 ```
 
 ... And that's it. Maybe in the future Google Colab will bundle `conda` as well and this won't be needed. But as of Apr 2019, this is the way to go!
+
+__Bonus__: [Ready-to-run Miniconda-enabled Notebook](https://gist.github.com/jaimergp/45015e75b4ae5f79a03d24e53b74ac1a).
