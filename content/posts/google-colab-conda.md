@@ -1,6 +1,7 @@
 ---
 title: "Using Google Colab with Conda"
 date: 2019-04-24T14:47:28+02:00
+lastmod: 2019-08-07T18:24:00+02:00
 ---
 
 [Google Colab(oratory)](https://colab.research.google.com/) is an invaluable resource for data science. You get GPU/TPU computing power while from a Jupyter Notebook frontend running on Google's servers... for free! Surprisingly though, `conda` is not preinstalled in the default configuration. Learn how to fix it!
@@ -8,6 +9,13 @@ date: 2019-04-24T14:47:28+02:00
 <!--more-->
 
 ---
+
+__Update Aug 7th 2019__:
+
+Instructions below do not work for Python 3 anymore (I will look into this). Using Python 2.7 does work, though! You will have to download Anaconda for Python 2.7 and set up Google Colab accordingly. I cannot recommend this approach since Python 2 will not receive support anymore.
+
+---
+
 __TLDR__: Just run these two cells at the beginning of your Colab notebook:
 
 ```bash
