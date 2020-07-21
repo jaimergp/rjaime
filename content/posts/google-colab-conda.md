@@ -1,7 +1,7 @@
 ---
 title: "Using Google Colab with Conda"
 date: 2019-04-24T14:47:28+02:00
-lastmod: 2019-08-07T18:24:00+02:00
+lastmod: 2020-07-21T17:34:00+02:00
 ---
 
 [Google Colab(oratory)](https://colab.research.google.com/) is an invaluable resource for data science. You get GPU/TPU computing power while from a Jupyter Notebook frontend running on Google's servers... for free! Surprisingly though, `conda` is not preinstalled in the default configuration. Learn how to fix it!
@@ -10,9 +10,9 @@ lastmod: 2019-08-07T18:24:00+02:00
 
 ---
 
-__Update Aug 7th 2019__:
+__Update July 21st 2020__:
 
-Instructions below do not work for Python 3 anymore (I will look into this). Using Python 2.7 does work, though! You will have to download Anaconda for Python 2.7 and set up Google Colab accordingly. I cannot recommend this approach since Python 2 will not receive support anymore.
+Instructions below seem to be working again! Just make sure you don't accidentally update `python` when installing more packages by including `python=3.6` in the list of packages to install.
 
 ---
 
@@ -23,7 +23,13 @@ __TLDR__: Just run these two cells at the beginning of your Colab notebook:
 ```
 ```python
 import sys
-sys.path.append('/usr/local/lib/python3.6/site-packages')
+sys.path.insert(0, "/usr/local/lib/python3.6/site-packages/")
+```
+
+If you are going to install new packages, always add `python=3.6` to the list to prevent accidental updates:
+
+```bash
+!conda install -yq python=3.6 your_extra_packages
 ```
 
 ---
@@ -33,7 +39,7 @@ While most popular projects offer `*.deb` packages and `pip` wheels (both method
 
 ## Install Miniconda
 
-Google Colab uses Python 3.6, so we need an Anaconda distribution compiled for that version. Recent builds use Python 3.7, so you have to use Anaconda `v5.2` or Miniconda `v4.5.4`. Choose one below.
+Google Colab uses Python 3.6, so we need an Anaconda distribution compiled for that version. Recent builds use later Python versions, so you have to use Anaconda `v5.2` or Miniconda `v4.5.4`. Choose one below.
 
 ### A - Using the full Anaconda distribution
 
@@ -66,7 +72,7 @@ To be able to import the Anaconda packages, you have patch `sys.path` so Python 
 
 ```python
 import sys
-sys.path.append('/usr/local/lib/python3.6/site-packages')
+sys.path.insert(0, "/usr/local/lib/python3.6/site-packages/")
 ```
 
 Now you can just use Python's `import` like usual.
@@ -74,15 +80,17 @@ Now you can just use Python's `import` like usual.
 
 ## Install more packages
 
-Of course, you can install more packages if needed. Just remember to use `-y` to avoid interactive prompts and `-q` to remove excessive output. Also, if the package needs `cuda`, make sure it is compiled for `v10`. For example, to install `openmmtools` (which relies on `openmm` and several conda-only packages).
+__Important__: The `conda` solver might accidentally update Python when you issue a `conda install` command. If you do it, things will stop working. To prevent this, make sure to add `python=3.6` as part of the package list.
+
+Of course, you can install more packages if needed. Just remember to use `-y` to avoid interactive prompts and `-q` to remove excessive output. Also, if the package needs `cuda`, make sure it is compiled for `v10` or `v10.1`. For example, to install `openmm`:
 
 ```bash
-!conda install -y -q -c conda-forge -c omnia/label/cuda100 -c omnia openmmtools
+!conda install -y -q -c conda-forge -c omnia/label/cuda100 -c omnia openmm python=3.6
 ```
 
 > Solving the conda environment in terms of dependencies can take a while sometimes. In some tests, that last command took 15-20 minutes, but in other cases it finished in 2 minutes. `¯\_(ツ)_/¯`
 
-Check GPU support with `openmm` tests:
+Check GPU support with `openmm` tests (assuming you have started the Colab instance in GPU or TPU mode!):
 
 ```python
 import simtk.testInstallation
@@ -109,6 +117,6 @@ CPU vs. OpenCL: 8.15821e-07
 CUDA vs. OpenCL: 2.17776e-07
 ```
 
-... And that's it. Maybe in the future Google Colab will bundle `conda` as well and this won't be needed. But as of Apr 2019, this is the way to go!
+... And that's it. Maybe in the future Google Colab will bundle `conda` as well and this won't be needed. But as of Apr 2019 (and July 2020), this is the way to go!
 
 __Bonus__: [Ready-to-run Miniconda-enabled Notebook](https://gist.github.com/jaimergp/45015e75b4ae5f79a03d24e53b74ac1a).
