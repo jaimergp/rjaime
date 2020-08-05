@@ -43,9 +43,11 @@ Add it to your `.bashrc` and you can use it like this: `compressPDF thesis.pdf`.
 
 One of the more time-consuming tasks I had to do during the writing was to review all my BibTeX citations so the author names, journal abbreviations and other details were accurate. It was so painful that I decided to automate it as much as possible and ended up creating a Python tool to help in the process: [fixbibtex](https://github.com/jaimergp/fixbibtex). It is not perfect, but it can help complete missing metadata if the original entry is good enough.
 
+> __Update 2020.08__: I am no longer developing `fixbibtex`, but I found a better maintained project that does essentially the same. Check nschloe's [`betterbib`](https://github.com/nschloe/betterbib)! It's awesome!
+
 However, I would not recommend resorting to this approach. Even with the support of CrossRef behind the scenes, you will have to manually amend some entries anyway. My advice is to start fixing entries earlier.
 
-By earlier I mean *as soon as you save it in your `.bib` file*. To do that, the best way is to retrieve the DOI of the article and query the [doi.org](https://doi.org) site.
+By earlier I mean *as soon as you save them in your `.bib` file*. To do that, the best way is to retrieve the DOI of the article and query the [doi.org](https://doi.org) site.
 
 This Bash function (inspired in [this one](https://users.aalto.fi/~mkouhia/2016/bibtex-from-dx-doi-org/)) will return BibTeX citations for every DOI passed (just the DOI, no prefixes nor URLs).
 
@@ -56,7 +58,6 @@ doi2bib() {
         echo
     done
 }
-
 ```
 
 Paste it in your `.bashrc` and the call `doi2bib doi1 [doi2] [doi3] [...]`. For example:
