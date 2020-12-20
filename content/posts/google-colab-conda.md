@@ -10,17 +10,30 @@ lastmod: 2020-07-21T17:34:00+02:00
 
 ---
 
-__Update July 21st 2020__:
+**Update December 20th 2020**:
+
+I have created [`condacolab`](https://github.com/jaimergp/condacolab), a Python package that will do all of this for you! Basically, now you only need this in your first notebook cell:
+
+```
+!pip install -q condacolab
+import condacolab
+condacolab.install()
+```
+
+Check [the repo](https://github.com/jaimergp/condacolab) for more details and examples!
+
+**Update July 21st 2020**:
 
 Instructions below seem to be working again! Just make sure you don't accidentally update `python` when installing more packages by including `python=3.6` in the list of packages to install.
 
 ---
 
-__TLDR__: Just run these two cells at the beginning of your Colab notebook:
+**TLDR**: Just run these two cells at the beginning of your Colab notebook:
 
 ```bash
 !wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh && bash Anaconda3-5.2.0-Linux-x86_64.sh -bfp /usr/local
 ```
+
 ```python
 import sys
 sys.path.insert(0, "/usr/local/lib/python3.6/site-packages/")
@@ -33,6 +46,7 @@ If you are going to install new packages, always add `python=3.6` to the list to
 ```
 
 ---
+
 Python [has become](https://insights.stackoverflow.com/trends?tags=java%2Cc%2Cc%2B%2B%2Cpython%2Cc%23%2Cvb.net%2Cjavascript%2Cassembly%2Cphp%2Cperl%2Cruby%2Cvb%2Cswift%2Cr%2Cobjective-c&utm_source=so-owned&utm_medium=blog&utm_campaign=gen-blog&utm_content=blog-link&utm_term=incredible-growth-python) the most popular language in StackOverflow and one could argue that its success is recently due to data science in general and machine learning in particular. Most of the data scientists rely on the [Anaconda distribution](https://www.anaconda.com/) or, at least, its [package manager](https://conda.io/) to install the libraries they need: `conda`.
 
 While most popular projects offer `*.deb` packages and `pip` wheels (both methods officially supported by Google Colab), some are only distributed through `conda` (for example, [OpenMM](http://openmm.org)). However, `conda` is not preinstalled in the Colab environments! The good news is that you can install it manually for each notebook.
@@ -77,10 +91,9 @@ sys.path.insert(0, "/usr/local/lib/python3.6/site-packages/")
 
 Now you can just use Python's `import` like usual.
 
-
 ## Install more packages
 
-__Important__: The `conda` solver might accidentally update Python when you issue a `conda install` command. If you do it, things will stop working. To prevent this, make sure to add `python=3.6` as part of the package list.
+**Important**: The `conda` solver might accidentally update Python when you issue a `conda install` command. If you do it, things will stop working. To prevent this, make sure to add `python=3.6` as part of the package list.
 
 Of course, you can install more packages if needed. Just remember to use `-y` to avoid interactive prompts and `-q` to remove excessive output. Also, if the package needs `cuda`, make sure it is compiled for `v10` or `v10.1`. For example, to install `openmm`:
 
@@ -119,4 +132,4 @@ CUDA vs. OpenCL: 2.17776e-07
 
 ... And that's it. Maybe in the future Google Colab will bundle `conda` as well and this won't be needed. But as of Apr 2019 (and July 2020), this is the way to go!
 
-__Bonus__: [Ready-to-run Miniconda-enabled Notebook](https://gist.github.com/jaimergp/45015e75b4ae5f79a03d24e53b74ac1a).
+**Bonus**: [Ready-to-run Miniconda-enabled Notebook](https://gist.github.com/jaimergp/45015e75b4ae5f79a03d24e53b74ac1a).
