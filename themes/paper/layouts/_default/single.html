@@ -5,8 +5,8 @@
     <p class="post-meta">
       {{- if or .Params.author .Site.Params.author -}}
       {{ .Params.author | default .Site.Params.author }} · {{ end }}
-      {{- .Date.Format "2006-1-2" -}}
-      {{ if not (eq .Lastmod .Date) }} &middot; Edited on {{ .Lastmod.Format " 2006-1-2" }}{{ end }}
+      {{- .Date.Format "2006.01.02" -}}
+      {{ if not (eq .Lastmod .Date) }} &middot; Edited on {{ .Lastmod.Format " 2006.01.02" }}{{ end }}
     </p>
   </header>
   <div class="post-content">{{ .Content }}</div>
