@@ -1,0 +1,49 @@
+{{ partial "header.html" . }}
+{{ if not .IsHome }}
+<header class="list-header">
+  {{ if eq .Data.Singular "tag" }}<span>Tagged in</span>
+  <h1 class="list-title">{{ .Data.Term }}</h1>
+  {{ else }}
+  <h1 class="list-title">{{ .Page.CurrentSection.Name }}</h1>
+  {{ end }}
+</header>
+{{ end }}
+{{ if .IsHome }}
+{{ .Scratch.Set "paginator" (.Paginate (where .Pages ".Section" "==" "posts") (index .Site.Params "paginate" | default 10)) }}
+{{ else }}
+{{ .Scratch.Set "paginator" (.Paginate (.Pages) (index .Site.Params "paginate" | default 10)) }}
+{{ end }}
+
+{{ $paginator := .Scratch.Get `paginator` }}
+{{ if gt $paginator.TotalPages 0 }}
+{{ range $index, $page := $paginator.Pages }}
+{{ if and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) }}
+{{ .Scratch.Set "postClass" "first-entry" }}
+{{ else }}
+{{ .Scratch.Set "postClass" "post-entry" }}
+{{ end }}
+<article class="post {{ .Scratch.Get `postClass` }}">
+  <header class="post-header">
+    <h2 class="post-title">{{ .Title }}</h2>
+  </header>
+  <p class="post-summary">{{ .Summary | plainify | htmlUnescape }}</i> </p>
+  <footer class="post-footer">
+    <p class="post-meta"><i class="far fa-calendar"></i> {{ .Date.Format "2006-1-2" }}</p>
+  </footer>
+  <a class="post-link" href="{{ .Permalink }}"></a>
+</article>
+{{ end }}
+{{ end }}
+{{ if gt $paginator.TotalPages 1 }}
+<footer class="list-footer">
+  <nav class="pagination">
+    {{ if $paginator.HasPrev }}
+    <a class="pagination-prev" href="{{ $paginator.Prev.URL }}">← Prev Page</a>
+    {{ end }}
+    {{ if $paginator.HasNext }}
+    <a class="pagination-next" href="{{ $paginator.Next.URL }}">Next Page →</a>
+    {{ end }}
+  </nav>
+</footer>
+{{ end }}
+{{ partial "footer.html" . }}
