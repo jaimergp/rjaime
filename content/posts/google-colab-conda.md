@@ -10,9 +10,11 @@ lastmod: 2020-12-20T16:58:00+02:00
 
 ---
 
-**Update December 20th 2020**:
+**Update March 10th 2021**:
 
-I have created [`condacolab`](https://github.com/jaimergp/condacolab), a Python package that will do all of this for you! Basically, now you only need this in your first notebook cell:
+Looks like Google Colab has upgraded to Python 3.7. The instructions below have been updated to reflect that fact!
+
+I have updated [`condacolab`](https://github.com/jaimergp/condacolab), a Python package that will do all of this for you! Basically, now you only need this in your first notebook cell:
 
 ```
 !pip install -q condacolab
@@ -22,27 +24,23 @@ condacolab.install()
 
 Check [the repo](https://github.com/jaimergp/condacolab) for more details and examples!
 
-**Update July 21st 2020**:
-
-Instructions below seem to be working again! Just make sure you don't accidentally update `python` when installing more packages by including `python=3.6` in the list of packages to install.
-
 ---
 
 **TLDR**: Just run these two cells at the beginning of your Colab notebook:
 
 ```bash
-!wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh && bash Anaconda3-5.2.0-Linux-x86_64.sh -bfp /usr/local
+!wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh && bash Anaconda3-2020.02-Linux-x86_64.sh -bfp /usr/local
 ```
 
 ```python
 import sys
-sys.path.insert(0, "/usr/local/lib/python3.6/site-packages/")
+sys.path.insert(0, "/usr/local/lib/python3.7/site-packages/")
 ```
 
-If you are going to install new packages, always add `python=3.6` to the list to prevent accidental updates:
+If you are going to install new packages, always add `python=3.7` to the list to prevent accidental updates:
 
 ```bash
-!conda install -yq python=3.6 your_extra_packages
+!conda install -yq python=3.7 your_extra_packages
 ```
 
 ---
@@ -53,14 +51,14 @@ While most popular projects offer `*.deb` packages and `pip` wheels (both method
 
 ## Install Miniconda
 
-Google Colab uses Python 3.6, so we need an Anaconda distribution compiled for that version. Recent builds use later Python versions, so you have to use Anaconda `v5.2` or Miniconda `v4.5.4`. Choose one below.
+Google Colab uses Python 3.7, so we need an Anaconda distribution compiled for that version. Recent builds use later Python versions, so you have to use Anaconda `v2020.02` or Miniconda `v4.9.2-py37`. Choose one below.
 
 ### A - Using the full Anaconda distribution
 
-The full Anaconda bundle contains [a huge selection of data science packages](https://docs.anaconda.com/anaconda/packages/py3.6_linux-64/) (650, to be exact) ready to run.
+The full Anaconda bundle contains [a huge selection of data science packages](https://docs.anaconda.com/anaconda/packages/old-pkg-lists/2020.02/py3.7_linux-64/) (694, to be exact) ready to run.
 
 ```bash
-!wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh && bash Anaconda3-5.2.0-Linux-x86_64.sh -bfp /usr/local
+!wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_64.sh && bash Anaconda3-2020.02-Linux-x86_64.sh -bfp /usr/local
 ```
 
 ### B - Using the Miniconda distribution
@@ -68,7 +66,7 @@ The full Anaconda bundle contains [a huge selection of data science packages](ht
 Miniconda only contains the basics: Python itself, `conda`, `pip` and some libraries. It's up to you to install whatever you need afterwards.
 
 ```bash
-!wget https://repo.continuum.io/miniconda/Miniconda3-4.5.4-Linux-x86_64.sh && bash Miniconda3-4.5.4-Linux-x86_64.sh -bfp /usr/local
+!wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.9.2-Linux-x86_64.sh && bash Miniconda3-py37_4.9.2-Linux-x86_64.sh -bfp /usr/local
 ```
 
 ## Test the installation
@@ -86,19 +84,19 @@ To be able to import the Anaconda packages, you have patch `sys.path` so Python 
 
 ```python
 import sys
-sys.path.insert(0, "/usr/local/lib/python3.6/site-packages/")
+sys.path.insert(0, "/usr/local/lib/python3.7/site-packages/")
 ```
 
 Now you can just use Python's `import` like usual.
 
 ## Install more packages
 
-**Important**: The `conda` solver might accidentally update Python when you issue a `conda install` command. If you do it, things will stop working. To prevent this, make sure to add `python=3.6` as part of the package list.
+**Important**: The `conda` solver might accidentally update Python when you issue a `conda install` command. If you do it, things will stop working. To prevent this, make sure to add `python=3.7` as part of the package list.
 
 Of course, you can install more packages if needed. Just remember to use `-y` to avoid interactive prompts and `-q` to remove excessive output. Also, if the package needs `cuda`, make sure it is compiled for `v10` or `v10.1`. For example, to install `openmm`:
 
 ```bash
-!conda install -y -q -c conda-forge -c omnia/label/cuda100 -c omnia openmm python=3.6
+!conda install -y -q -c conda-forge openmm cudatoolkit=10 python=3.7
 ```
 
 > Solving the conda environment in terms of dependencies can take a while sometimes. In some tests, that last command took 15-20 minutes, but in other cases it finished in 2 minutes. `¯\_(ツ)_/¯`
@@ -130,6 +128,6 @@ CPU vs. OpenCL: 8.15821e-07
 CUDA vs. OpenCL: 2.17776e-07
 ```
 
-... And that's it. Maybe in the future Google Colab will bundle `conda` as well and this won't be needed. But as of Apr 2019 (and July 2020), this is the way to go!
+... And that's it. Maybe in the future Google Colab will bundle `conda` as well and this won't be needed. But as of Apr 2019 (and July 2020, and March 2021), this is the way to go!
 
 **Bonus**: [Ready-to-run Miniconda-enabled Notebook](https://gist.github.com/jaimergp/45015e75b4ae5f79a03d24e53b74ac1a).
