@@ -1,7 +1,7 @@
 ---
 title: "Using Google Colab with Conda"
 date: 2019-04-24T14:47:28+02:00
-lastmod: 2020-12-20T16:58:00+02:00
+lastmod: 2021-03-10T20:14:00+02:00
 ---
 
 [Google Colab(oratory)](https://colab.research.google.com/) is an invaluable resource for data science. You get GPU/TPU computing power while from a Jupyter Notebook frontend running on Google's servers... for free! Surprisingly though, `conda` is not preinstalled in the default configuration. Learn how to fix it!
