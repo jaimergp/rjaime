@@ -6,7 +6,10 @@ menu:
 weight: -9
 type: page
 date: 2018-11-19T13:05:00+02:00
+lastmod: 2025-01-28
 ---
+
+> Note: As of 2025, this document has not seen an update since Nov 2018. A LOT has changed ever since. To be updated or archived.
 
 This is a living document in which I will be updating the projects I am currently involved in.
 
