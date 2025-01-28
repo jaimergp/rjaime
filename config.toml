@@ -19,15 +19,8 @@ description = "A personal blog about scientific software, music and miscellanea"
         weight = 10
 
     [[params.footer]]
-        identifier = "twitter"
-        name = "Twitter"
+        identifier = "bluesky"
+        name = "BlueSky"
         pre = "<i class='fab fa-twitter'></i>"
-        url = "https://twitter.com/jaime_rgp"
+        url = "https://bsky.app/profile/rjai.me"
         weight = 20
-
-    [[params.footer]]
-        identifier = "cv"
-        name = "CV"
-        pre = "<i class='fas fa-address-card'></i>"
-        url = "https://github.com/jaimergp/cv/blob/master/cv.pdf"
-        weight = 1
