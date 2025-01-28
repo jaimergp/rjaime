@@ -1,6 +1,7 @@
 ---
 title: 'Aukey EP-B4 Bluetooth headphones: How to disable "Low battery, please charge" messages'
 date: 2018-11-19T18:44:12+02:00
+aliases: ["/posts/aukey-ep-b4-low-battery"]
 ---
 
 A couple of years ago I bought Aukey's EP-B4 Bluetooth headphones so I could listen to some music in the gym without worrying about a wire. Instead I now worry about one more battery and an increasingly infuriating robotic voice.

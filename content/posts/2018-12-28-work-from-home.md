@@ -1,6 +1,7 @@
 ---
 title: "How I work from home: a tutorial"
 date: 2018-12-28T21:37:35+01:00
+aliases: ["/posts/work-from-home"]
 ---
 
 Doing computational research often means generating lots of data that needs to be processed and analyzed. In some fields, file sizes often go well into the gigabytes or even terabytes. If you have to work from home or are doing a short stay away from your workspace, downloading the full dataset to work on it locally is not only cumbersome, but inefficient. Are there any alternatives? Of course!
