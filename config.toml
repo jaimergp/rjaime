@@ -21,6 +21,6 @@ description = "A personal blog about scientific software, music and miscellanea"
     [[params.footer]]
         identifier = "bluesky"
         name = "BlueSky"
-        pre = "<i class='fab fa-twitter'></i>"
+        pre = "<i class='fab fa-bluesky'></i>"
         url = "https://bsky.app/profile/rjai.me"
         weight = 20
