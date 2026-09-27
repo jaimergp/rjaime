@@ -1,10 +1,10 @@
 baseURL = "https://rjai.me"
-languageCode = "en-us"
+locale = "en-us"
 title = "rjai.me - A personal blog about scientific software, music and miscellanea"
 theme = "paper"
 pygmentsCodeFences = true
 pygmentsStyle = "monokailight"
-disableKinds = ["taxonomy","taxonomyTerm"]
+disableKinds = ["taxonomy"]
 
 [params]
 author = "Jaime RGP"
@@ -24,3 +24,12 @@ description = "A personal blog about scientific software, music and miscellanea"
         pre = "<i class='fab fa-bluesky'></i>"
         url = "https://bsky.app/profile/rjai.me"
         weight = 20
+
+
+[markup]
+[markup.goldmark]
+[markup.goldmark.extensions]
+[markup.goldmark.extensions.passthrough]
+enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+inline = [['<kbd>', '</kbd>']]

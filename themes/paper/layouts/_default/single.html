@@ -21,10 +21,10 @@
   </footer>
   <!-- Comments system area start -->
   {{ if not (eq .Params.comments false) }}
-  {{ if .Site.DisqusShortname }}
+  {{ if .Site.Config.Services.Disqus.Shortname }}
   <div id="disqus_thread"></div>
   <script>
-    var disqus_shortname = '{{ .Site.DisqusShortname }}';
+    var disqus_shortname = '{{ .Site.Config.Services.Disqus.Shortname }}';
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
       s.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
