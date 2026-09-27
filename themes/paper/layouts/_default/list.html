@@ -9,7 +9,7 @@
 </header>
 {{ end }}
 {{ if .IsHome }}
-{{ .Scratch.Set "paginator" (.Paginate (where .Pages ".Section" "==" "posts") (index .Site.Params "paginate" | default 10)) }}
+{{ .Scratch.Set "paginator" (.Paginate (where .Site.RegularPages ".Section" "==" "posts") (index .Site.Params "paginate" | default 10)) }}
 {{ else }}
 {{ .Scratch.Set "paginator" (.Paginate (.Pages) (index .Site.Params "paginate" | default 10)) }}
 {{ end }}
