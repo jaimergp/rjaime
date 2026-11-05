@@ -1,6 +1,7 @@
 ---
 title: "Breakfasts"
 date: 2026-11-04T22:13:48+02:00
+lastmod: 2026-11-05T22:13:03+01:00
 ---
 
 I like having breakfast. I kind of love it. I often go to bed excited about tomorrow's breakfast, and I often wake up excited about it. In this blog post I'd like to document the recipes and cute spots I've come to love enough to revisit. I don't intend this to become a super-balanced list of well-curated options, but simply a catalog of my taste at a certain time. It's also an excuse to write about non-tech topics.
@@ -37,7 +38,6 @@ Their oat milk cappuccino never disappoints, and the Nordic toast is incredible.
 
 ![Camino's nordic toast](/images/breakfast-nordic.jpg)
 
-
 ### Casa Manila
 
 _[Av. del Descubrimiento, S/N, 11500 El Puerto de Santa María, Cádiz, Spain](https://maps.app.goo.gl/pn9R2bEnjiNH6ewJ9)_
@@ -52,3 +52,16 @@ _[Wrangelstraße 52, 10997 Berlin, Germany](https://maps.app.goo.gl/viP85qwcWish
 
 I ran into this by chance while walking around Kreuzkölln. Pretty small location, perhaps four or five tables. Good coffee, very nice interpretation of a French toast.
 
+### A Happy Pancake
+
+_[Japan, 〒530-0027 Osaka, Kita Ward, Doyamacho, 4−7 1F](https://maps.app.goo.gl/hgDfCCgotkoRzTqe6)_
+
+Those fluffy pancakes. I had the raspberry ones and I can't forget about them.
+
+![I was the happy pancake](/images/breakfast-fluffy.jpg)
+
+### House of Small Wonder
+
+_[Auguststraße 11-13, 10117 Berlin, Germany](https://maps.app.goo.gl/Zpus5LjFTPNNw8Dm9)_
+
+Western brunch with a touch of Japanese cuisine. The brunch set with three "tapas" is very cost effective. Everything was tasty, oat milk cappuccino included. Reservation is almost compulsory.
